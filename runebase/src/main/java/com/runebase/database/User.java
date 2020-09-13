@@ -1,6 +1,7 @@
 package com.runebase.database;
 
 import java.util.ArrayList;
+
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
@@ -8,44 +9,33 @@ import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.lang.NonNull;
 
-/**
- * Modellklasse für die Speicherung von Anwenderdaten. Enthält die Abbildung auf
- * eine Datenbanktabelle in Form von JPA-Annotation.
- * 
- * @author Bastian Katz (mailto: bastian.katz@hm.edu)
- */
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity
+@NoArgsConstructor
+@Data
 public class User {
 
 	@Id
-	@NotNull
-	@Length(min = 4, max = 32)
-	@Column(length = 32)
-	private String login;
+	@GeneratedValue
+	private Long id;
 
-	@NotNull
-	@Length(min = 4, max = 32)
-	@Column(length = 32)
+	@NonNull
+	@GeneratedValue
 	private String name;
 
-	@NotNull
-	@Length(min = 7, max = 32) // lenght includes "{noop}"
-	@Column(length = 32)
+	@NonNull
+	@GeneratedValue
 	private String password;
-	
-	@NotNull
-	@Length(min = 7, max = 32) // lenght includes "{noop}"
-	@Column(length = 32)
-	private Collection<> favorites;
-
-	@Column(name = "ADMIN")
-	private boolean administrator;
 
 	/**
 	 * JPA-kompatibler Kostruktor. Wird nur von JPA verwendet und darf private sein.
@@ -53,49 +43,34 @@ public class User {
 	public User() {
 		// JPA benötigt einen Default-Konstruktor!
 	}
-
-	/**
-	 * Konstruktor zum Initialisieren eines neuen Anwenders.
-	 * 
-	 * @param login         login, mindestens 4 Zeichen lang
-	 * @param password      Passwort inklusive Hash "{noop}"
-	 * @param administrator Flag (true für Administratorrechte)
-	 */
-	public User(String login, String name, String password, boolean administrator) {
-		super();
-		this.login = login;
+	
+	public User(String name) {
 		this.name = name;
 		this.password = password;
-		this.administrator = administrator;
 	}
 
-	@Override
-	public String toString() {
-		return login + (administrator ? " (admin)" : "");
+	public Long getId() {
+		return id;
 	}
 
-	public String getLogin() {
-		return login;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public String getPassword() {
+		return password;
 	}
 
-	public boolean isAdministrator() {
-		return administrator;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	/*
@@ -107,7 +82,7 @@ public class User {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(administrator, login, password);
+		return Objects.hash(name, password);
 	}
 
 	@Override
@@ -119,7 +94,14 @@ public class User {
 			return false;
 		}
 		User other = (User) obj;
-		return Objects.equals(getLogin(), other.getLogin());
+		return Objects.equals(getName(), other.getName());
 	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", password=" + password + "]";
+	}
+	
+	
 
 }

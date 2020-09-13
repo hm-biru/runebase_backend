@@ -1,24 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.3.3.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com</groupId>
 	<artifactId>runebase</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>runebase</name>
 	<description>Demo project for Spring Boot</description>
-<properties>
+	<properties>
 		<java.version>11</java.version>
-		<sonar.host.url>http://217.160.212.83</sonar.host.url>
-		<sonar.projectName>GRP25</sonar.projectName>
-		<sonar.login>b20a2032ff7d06ae2c4de941a1e8a07bd116e033</sonar.login>
-		<sonar.projectKey>GRP25</sonar.projectKey>
 	</properties>
 
 	<dependencies>
@@ -42,6 +39,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
 			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.12</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
