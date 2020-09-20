@@ -16,9 +16,13 @@ import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-class UserController {
+public class UserController {
 	@Autowired
 	private UserRepository userRepository;
+
+	public UserController(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
 
 	@GetMapping("/users")
 	public List<User> getUsers() {
